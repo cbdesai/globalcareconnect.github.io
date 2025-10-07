@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareConnect - Connecting Seniors with Care & Community</title>
+    <style>
+        /* Remove color variables */
+        body {
+            color: #333;
+            background: #fff;
+        }
+        nav {
+            background: linear-gradient(135deg, #7BA9AB 0%, #5A8A8C 100%);
+        }
+        nav .logo {
+            color: white;
+        }
+        .hero {
+            background: linear-gradient(rgba(123, 169, 171, 0.85), rgba(90, 138, 140, 0.85)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%237BA9AB;stop-opacity:1" /><stop offset="100%" style="stop-color:%235A8A8C;stop-opacity:1" /></linearGradient></defs><rect fill="url(%23bg)" width="1200" height="600"/><g opacity="0.1" fill="%23fff"><circle cx="150" cy="100" r="60"/><circle cx="1000" cy="450" r="80"/><circle cx="600" cy="200" r="50"/><circle cx="300" cy="400" r="70"/><circle cx="900" cy="150" r="40"/></g></svg>');
+        }
+        .persona-card {
+            background: linear-gradient(135deg, #E8F2F3 0%, #C8DBDC 100%);
+        }
+        .persona-card:hover {
+            border-color: #7BA9AB;
+            box-shadow: 0 15px 35px rgba(123, 169, 171, 0.3);
+        }
+        .persona-card h3 {
+            color: #5A8A8C;
+        }
+        .action-card {
+            background: white;
+        }
+        .action-card h3 {
+            color: #5A8A8C;
+        }
+        .action-card button, .back-button, .search-bar button {
+            background: #7BA9AB;
+            color: white;
+        }
+        .action-card button:hover, .back-button:hover, .search-bar button:hover {
+            background: #5A8A8C;
+        }
+        .page-hero {
+            background: linear-gradient(135deg, #7BA9AB 0%, #5A8A8C 100%);
+            color: white;
+        }
+        .footer-section h3 {
+            color: #7BA9AB;
+        }
+        .footer-section a {
+            color: #cbd5e0;
+        }
+        .footer-section a:hover {
+            color: white;
+        }
+        .footer-bottom {
+            color: #cbd5e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--accent);
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #7BA9AB 0%, #5A8A8C 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex !important;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none !important;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(123, 169, 171, 0.85), rgba(90, 138, 140, 0.85)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%237BA9AB;stop-opacity:1" /><stop offset="100%" style="stop-color:%235A8A8C;stop-opacity:1" /></linearGradient></defs><rect fill="url(%23bg)" width="1200" height="600"/><g opacity="0.1" fill="%23fff"><circle cx="150" cy="100" r="60"/><circle cx="1000" cy="450" r="80"/><circle cx="600" cy="200" r="50"/><circle cx="300" cy="400" r="70"/><circle cx="900" cy="150" r="40"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem 2rem 3rem;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 1200px;
+            height: 350px; /* Increased from 180px */
+            margin: 0 auto 2rem;
+            background-image: url('hero-banner.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+
+        /* Persona Selector */
+        .persona-selector {
+            max-width: 1400px;
+            margin: -3rem auto 4rem;
+            padding: 0 2rem;
+            padding-top: 3rem;
+        }
+
+        .persona-selector h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .persona-card {
+            background: linear-gradient(135deg, #E8F2F3 0%, #C8DBDC 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 3px solid transparent;
+        }
+
+        .persona-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(123, 169, 171, 0.3);
+            border-color: #7BA9AB;
+        }
+
+        .persona-card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .persona-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            object-fit: contain;
+            background: none;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .persona-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #5A8A8C;
+        }
+
+        .persona-card p {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        /* Content Pages (Hidden by default) */
+        .page-content {
+            display: none;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #7BA9AB 0%, #5A8A8C 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .action-card {
+            background: white;
+            padding: 1.6rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 256px;
+        }
+
+        .action-card h3 {
+            color: #5A8A8C;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .action-card p {
+            flex: 1 1 auto;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .action-card button {
+            background: #7BA9AB;
+            color: white;
+            border: none;
+            padding: 0.64rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            transition: background 0.3s;
+            align-self: center;
+        }
+
+        .action-card button:hover {
+            background: #5A8A8C;
+        }
+
+        .back-button {
+            background: #7BA9AB;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #5A8A8C;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #7BA9AB;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #4a5568;
+            color: #cbd5e0;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            padding: 1rem 2rem;
+            background: #7BA9AB;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #5A8A8C;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .persona-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1200px) and (min-width: 769px) {
+            .persona-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .page-hero.persona-hero {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            min-height: 180px;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .page-hero.persona-hero > img {
+            width: 180px;
+            height: 180px;
+            border-radius: 16px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .page-hero.persona-hero > div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .page-hero.persona-hero h1,
+        .page-hero.persona-hero p,
+        .page-hero.persona-hero .search-bar {
+            text-align: center;
+        }
+
+        /* Persona and Action Card Subtitle Readability */
+        .persona-card p,
+        .action-card p {
+            color: #2d3748;
+            font-size: 1.05rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+        /* Subpage Action Card Button Contrast and Style */
+        .action-card button {
+            background: #35706a;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.05rem;
+            letter-spacing: 0.04em;
+            box-shadow: 0 2px 8px rgba(53,112,106,0.10);
+            border: none;
+        }
+        .action-card button:hover {
+            background: #24504b;
+            color: #fff;
+        }
+        /* Main Page Persona Section Color Reversal */
+        .persona-selector {
+            background: #E8F2F3;
+            border-radius: 10px;
+        }
+        .persona-selector h2 {
+            background: #E8F2F3;
+        }
+        .persona-grid {
+            background: #E8F2F3;
+        }
+        .persona-card {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo" onclick="showHome()">CareConnect</a>
+            <ul>
+                <li><a href="#" onclick="showHome()">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-image"></div>
+        </section>
+
+        <!-- Persona Selector -->
+        <section class="persona-selector">
+            <h2>Connecting Seniors, Families, and Care Providers in One Place</h2>
+            <div class="persona-grid">
+                <div class="persona-card" onclick="showPage('active-seniors')">
+                    <img src="Acive_Senior_persona_indian.png" alt="Active Senior" class="persona-image" />
+                    <h3>Active Senior</h3>
+                    <p>Stay engaged with community activities and social programs</p>
+                </div>
+
+                <div class="persona-card" onclick="showPage('seniors')">
+                    <img src="Senior_persona_indian.png" alt="Senior" class="persona-image" />
+                    <h3>Senior</h3>
+                    <p>Find care services, support, and community</p>
+                </div>
+
+                <div class="persona-card" onclick="showPage('family')">
+                    <img src="Family_persona_indian.png" alt="Family Member / Caregiver" class="persona-image" />
+                    <h3>Family Member / Caregiver</h3>
+                    <p>Search care options and access support resources</p>
+                </div>
+
+                <div class="persona-card" onclick="showPage('facility')">
+                    <img src="Facility_persona_indian.png" alt="Facility Care Center" class="persona-image" />
+                    <h3>Facility Care Center</h3>
+                    <p>Register your center and connect with seniors</p>
+                </div>
+
+                <div class="persona-card" onclick="showPage('homecare')">
+                    <img src="Homecare_persona_indian.png" alt="Home Care Provider" class="persona-image" />
+                    <h3>Home Care Provider</h3>
+                    <p>Build your independent care practice</p>
+                </div>
+
+                <div class="persona-card" onclick="showPage('donor')">
+                    <img src="Donor_persona_indian.png" alt="Donor / Sponsor" class="persona-image" />
+                    <h3>Donor / Sponsor</h3>
+                    <p>Support seniors in need through donations</p>
+                </div>
+
+                <div class="persona-card" onclick="showPage('volunteer')">
+                    <img src="Volunteer_persona_indian.png" alt="Volunteer" class="persona-image" />
+                    <h3>Volunteer</h3>
+                    <p>Make a meaningful difference in a senior's life</p>
+                </div>
+
+                <div class="persona-card" onclick="showPage('community')">
+                    <img src="Community_persona_indian.png" alt="Community Partner" class="persona-image" />
+                    <h3>Community Partner</h3>
+                    <p>Corporate partnerships, schools, and organizations</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Seniors Page -->
+    <div id="seniors-page" class="page-content">
+        <button class="back-button" onclick="showHome()">← Back to Home</button>
+        <div class="page-hero persona-hero">
+            <img src="Senior_persona_indian.png" alt="Senior" />
+            <div>
+                <h1>Find the Care and Community You Deserve</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search by location or service...">
+                    <button>Search</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <h3>🏠 Find Care & Services</h3>
+                <p>Search assisted living, in-home care, and browse all options</p>
+                <button>Explore Options</button>
+            </div>
+
+            <div class="action-card">
+                <h3>💰 Get Financial Support</h3>
+                <p>Learn about "Sponsor a Senior" and apply for assistance</p>
+                <button>Learn More</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🎨 Join Community Events</h3>
+                <p>View event calendar and register for activities</p>
+                <button>See Events</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🚗 Arrange a Ride</h3>
+                <p>Book transportation to appointments and activities</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📋 Compare Help Centers</h3>
+                <p>Read reviews and compare facilities in your area</p>
+                <button>Compare</button>
+            </div>
+
+            <div class="action-card">
+                <h3>❤️ My Health</h3>
+                <p>Access health resources and track your wellness</p>
+                <button>View Health</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Family Page -->
+    <div id="family-page" class="page-content">
+        <button class="back-button" onclick="showHome()">← Back to Home</button>
+        <div class="page-hero persona-hero">
+            <img src="Family_persona_indian.png" alt="Family Member / Caregiver" />
+            <div>
+                <h1>Resources for Families & Caregivers</h1>
+                <p>Find the right care and support for your loved ones</p>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <h3>🔍 Search Senior Care Options</h3>
+                <p>Comprehensive directory of care facilities and services</p>
+                <button>Start Search</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📚 Toolkits & Guides</h3>
+                <p>How to choose a home, legal resources, and more</p>
+                <button>View Guides</button>
+            </div>
+
+            <div class="action-card">
+                <h3>💼 Health & Financial Resources</h3>
+                <p>Access planning tools and expert advice</p>
+                <button>Get Resources</button>
+            </div>
+
+            <div class="action-card">
+                <h3>👥 Join Support Groups</h3>
+                <p>Connect with other caregivers and families</p>
+                <button>Find Groups</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Facility Page -->
+    <div id="facility-page" class="page-content">
+        <button class="back-button" onclick="showHome()">← Back to Home</button>
+        <div class="page-hero persona-hero">
+            <img src="Facility_persona_indian.png" alt="Facility Care Center" />
+            <div>
+                <h1>Connect with Seniors Seeking Your Care.</h1>
+                <p>List your service for free and increase your visibility</p>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <h3>📝 List Your Service</h3>
+                <p>Register your center and manage your profile</p>
+                <button>Get Started</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📊 Provider Dashboard</h3>
+                <p>Manage listings, services, and reviews</p>
+                <button>Login</button>
+            </div>
+
+            <div class="action-card">
+                <h3>💰 Fundraising Tools</h3>
+                <p>Access grants and build partnerships</p>
+                <button>View Tools</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📖 Staff Resources</h3>
+                <p>Training materials and best practices</p>
+                <button>Access Resources</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Care Provider Page -->
+    <div id="homecare-page" class="page-content">
+        <button class="back-button" onclick="showHome()">← Back to Home</button>
+        <div class="page-hero persona-hero">
+            <img src="Homecare_persona_indian.png" alt="Home Care Provider" />
+            <div>
+                <h1>Build Your Independent Care Practice</h1>
+                <p>Find clients who need you and grow your business</p>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <h3>👤 Create Your Profile</h3>
+                <p>Set up your professional profile and get verified</p>
+                <button>Sign Up</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📅 Manage Bookings</h3>
+                <p>Integrated calendar and appointment system</p>
+                <button>View Calendar</button>
+            </div>
+
+            <div class="action-card">
+                <h3>⭐ Build Your Reputation</h3>
+                <p>Collect reviews and showcase your expertise</p>
+                <button>My Reviews</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🎓 Training Resources</h3>
+                <p>Access webinars and certification courses</p>
+                <button>Learn More</button>
+            </div>
+
+            <div class="action-card">
+                <h3>💳 Payment Processing</h3>
+                <p>Secure payment handling and invoicing</p>
+                <button>Set Up</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🤝 Find Opportunities</h3>
+                <p>Job listings and partnership opportunities</p>
+                <button>Browse Jobs</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donor Page -->
+    <div id="donor-page" class="page-content">
+        <button class="back-button" onclick="showHome()">← Back to Home</button>
+        <div class="page-hero persona-hero">
+            <img src="Donor_persona_indian.png" alt="Donor / Sponsor" />
+            <div>
+                <h1>Support Seniors in Need</h1>
+                <p>Your contribution makes a real difference</p>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <h3>❤️ Sponsor a Senior</h3>
+                <p>Support specific seniors or campaigns</p>
+                <button>Sponsor Now</button>
+            </div>
+
+            <div class="action-card">
+                <h3>💝 One-Time Gift</h3>
+                <p>Make a single donation to help seniors</p>
+                <button>Donate</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🔄 Monthly Giving</h3>
+                <p>Become a recurring donor and sustain our mission</p>
+                <button>Set Up Monthly</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📊 Donation Transparency</h3>
+                <p>See exactly where your money goes</p>
+                <button>View Impact</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🏢 Corporate Partnerships</h3>
+                <p>CSR programs and corporate giving options</p>
+                <button>Learn More</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Volunteer Page -->
+    <div id="volunteer-page" class="page-content">
+        <button class="back-button" onclick="showHome()">← Back to Home</button>
+        <div class="page-hero persona-hero">
+            <img src="Volunteer_persona_indian.png" alt="Volunteer" />
+            <div>
+                <h1>Make a Meaningful Difference in a Senior's Life</h1>
+                <p>Donate your time and skills to help seniors thrive</p>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <h3>🤝 Volunteer Locally</h3>
+                <p>Find in-person volunteer opportunities near you</p>
+                <button>Find Opportunities</button>
+            </div>
+
+            <div class="action-card">
+                <h3>💻 Virtual Volunteering</h3>
+                <p>Connect with seniors through video calls</p>
+                <button>Get Started</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🎉 Event Registration</h3>
+                <p>Help organize and support community events</p>
+                <button>View Events</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📢 Start a Fundraiser</h3>
+                <p>Become a community champion and raise funds</p>
+                <button>Create Campaign</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Partner Page -->
+    <div id="community-page" class="page-content">
+        <button class="back-button" onclick="showHome()">← Back to Home</button>
+        <div class="page-hero persona-hero">
+            <img src="Community_persona_indian.png" alt="Community Partner" />
+            <div>
+                <h1>Partner With Us to Create Impact</h1>
+                <p>Corporate partnerships, schools, and community organizations</p>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <h3>🏢 Corporate Partnerships</h3>
+                <p>CSR programs and employee engagement opportunities</p>
+                <button>Partner With Us</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🎓 Schools & Art Institutes</h3>
+                <p>Youth programs and intergenerational activities</p>
+                <button>Register Program</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🎪 Organize an Event</h3>
+                <p>Host events that bring communities together</p>
+                <button>Plan Event</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📊 Impact Dashboard</h3>
+                <p>Track ROI and community outcomes</p>
+                <button>View Dashboard</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📰 Media & Recognition</h3>
+                <p>Get featured for your contributions</p>
+                <button>Learn More</button>
+            </div>
+
+            <div class="action-card">
+                <h3>📢 Influencer Partnerships</h3>
+                <p>Amplify our mission through your platform</p>
+                <button>Collaborate</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Seniors Page -->
+    <div id="active-seniors-page" class="page-content">
+        <button class="back-button" onclick="showHome()">← Back to Home</button>
+        <div class="page-hero persona-hero">
+            <img src="Acive_Senior_persona_indian.png" alt="Stay Active" />
+            <div>
+                <h1>Stay Active, Engaged, and Connected</h1>
+                <p>Programs and activities designed for active seniors</p>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <h3>🎨 Activities & Events</h3>
+                <p>Art workshops, book clubs, and social programs</p>
+                <button>View Calendar</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🤸 Wellness Programs</h3>
+                <p>Fitness classes and health initiatives</p>
+                <button>Join Programs</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🎓 Learning Opportunities</h3>
+                <p>Classes, lectures, and skill-building workshops</p>
+                <button>Explore</button>
+            </div>
+
+            <div class="action-card">
+                <h3>👥 Social Groups</h3>
+                <p>Connect with peers who share your interests</p>
+                <button>Find Groups</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Mission & Vision</a></li>
+                    <li><a href="#">Leadership Team</a></li>
+                    <li><a href="#">Partners & Sponsors</a></li>
+                    <li><a href="#">Impact Reports</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>For Seniors</h3>
+                <ul>
+                    <li><a href="#">Find Care Services</a></li>
+                    <li><a href="#">Community Events</a></li>
+                    <li><a href="#">Financial Support</a></li>
+                    <li><a href="#">Health Resources</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>For Providers</h3>
+                <ul>
+                    <li><a href="#">Register Your Facility</a></li>
+                    <li><a href="#">Provider Dashboard</a></li>
+                    <li><a href="#">Training Resources</a></li>
+                    <li><a href="#">Best Practices</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Get Involved</h3>
+                <ul>
+                    <li><a href="#">Donate</a></li>
+                    <li><a href="#">Volunteer</a></li>
+                    <li><a href="#">Corporate Partnerships</a></li>
+                    <li><a href="#">Community Events</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Helpdesk</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 CareConnect. All rights reserved. | Connecting generations, empowering seniors.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.getElementById('home-page').style.display = 'none';
+            
+            const pages = ['seniors', 'family', 'facility', 'homecare', 'donor', 'volunteer', 'community', 'active-seniors'];
+            pages.forEach(page => {
+                document.getElementById(page + '-page').classList.remove('active');
+            });
+            
+            document.getElementById(pageId + '-page').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showHome() {
+            document.getElementById('home-page').style.display = 'block';
+            
+            const pages = ['seniors', 'family', 'facility', 'homecare', 'donor', 'volunteer', 'community', 'active-seniors'];
+            pages.forEach(page => {
+                document.getElementById(page + '-page').classList.remove('active');
+            });
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
