@@ -491,6 +491,66 @@
         .persona-card {
             background: white;
         }
+
+        /* Modal (Facility Registration) */
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal[aria-hidden="true"] {
+            display: none;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 720px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            background: transparent;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        .modal form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .modal form input,
+        .modal form textarea,
+        .modal form select {
+            padding: 0.6rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        .modal form textarea { grid-column: 1 / -1; min-height: 110px; }
+
+        .modal .form-actions { grid-column: 1 / -1; display:flex; gap:0.75rem; justify-content:flex-end; margin-top:0.25rem }
+
+        .modal .btn-primary { background: #35706a; color: #fff; border: none; padding: 0.6rem 1rem; border-radius: 6px; cursor: pointer }
+
+        .modal-success { text-align:center; padding:1rem; font-weight:600; color:#1a7f6a }
     </style>
 </head>
 <body>
@@ -674,7 +734,7 @@
             <div class="action-card">
                 <h3>📝 List Your Service</h3>
                 <p>Register your center and manage your profile</p>
-                <button>Get Started</button>
+                <button onclick="openFacilityForm()">Get Started</button>
             </div>
 
             <div class="action-card">
@@ -712,7 +772,7 @@
             <div class="action-card">
                 <h3>👤 Create Your Profile</h3>
                 <p>Set up your professional profile and get verified</p>
-                <button>Sign Up</button>
+                <button onclick="openProviderForm()">Sign Up</button>
             </div>
 
             <div class="action-card">
@@ -826,6 +886,12 @@
                 <p>Become a community champion and raise funds</p>
                 <button>Create Campaign</button>
             </div>
+            
+            <div class="action-card">
+                <h3>🙋 Volunteer Registration</h3>
+                <p>Sign up to volunteer and we'll match you with opportunities</p>
+                <button onclick="openVolunteerForm()">Sign Up</button>
+            </div>
         </div>
     </div>
 
@@ -918,6 +984,108 @@
     </div>
 
     <!-- Footer -->
+    <!-- Facility Registration Modal -->
+    <div id="facility-modal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="facility-modal-title">
+            <button class="modal-close" onclick="closeFacilityForm()" aria-label="Close">&times;</button>
+            <h2 id="facility-modal-title">Register Your Facility</h2>
+
+            <form id="facility-form" onsubmit="submitFacilityForm(event)">
+                <input type="text" id="facility-name" name="facilityName" placeholder="Facility name" required />
+                <input type="text" id="contact-person" name="contactPerson" placeholder="Contact person" required />
+                <input type="email" id="contact-email" name="email" placeholder="Contact email" required />
+                <input type="tel" id="contact-phone" name="phone" placeholder="Phone number" />
+                <input type="text" id="facility-city" name="city" placeholder="City / Location" />
+                <select id="facility-service" name="service">
+                    <option value="">Select primary service</option>
+                    <option>Assisted Living</option>
+                    <option>Memory Care</option>
+                    <option>In-Home Care</option>
+                    <option>Rehabilitation</option>
+                    <option>Specialty Care</option>
+                </select>
+
+                <textarea id="facility-desc" name="description" placeholder="Short description / services offered"></textarea>
+
+                <div class="form-actions">
+                    <button type="button" class="back-button" onclick="closeFacilityForm()">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Registration</button>
+                </div>
+            </form>
+
+            <div id="facility-success" class="modal-success" style="display:none;">
+                Thank you — your registration request has been received. We'll contact you soon.
+            </div>
+        </div>
+    </div>
+
+    <!-- Provider (Home Care) Registration Modal -->
+    <div id="provider-modal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="provider-modal-title">
+            <button class="modal-close" onclick="closeProviderForm()" aria-label="Close">&times;</button>
+            <h2 id="provider-modal-title">Create Your Home Care Profile</h2>
+
+            <form id="provider-form" onsubmit="submitProviderForm(event)">
+                <input type="text" id="provider-name" name="providerName" placeholder="Your full name" required />
+                <input type="text" id="provider-business" name="businessName" placeholder="Business / Practice name" />
+                <input type="email" id="provider-email" name="email" placeholder="Contact email" required />
+                <input type="tel" id="provider-phone" name="phone" placeholder="Phone number" />
+                <input type="text" id="provider-city" name="city" placeholder="City / Service area" />
+                <select id="provider-service" name="service">
+                    <option value="">Primary service</option>
+                    <option>Personal Care</option>
+                    <option>Companion Care</option>
+                    <option>Respite Care</option>
+                    <option>Skilled Nursing</option>
+                    <option>Therapy Services</option>
+                </select>
+
+                <textarea id="provider-desc" name="description" placeholder="Short bio or services you provide"></textarea>
+
+                <div class="form-actions">
+                    <button type="button" class="back-button" onclick="closeProviderForm()">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Profile</button>
+                </div>
+            </form>
+
+            <div id="provider-success" class="modal-success" style="display:none;">
+                Profile created — we'll review and contact you soon.
+            </div>
+        </div>
+    </div>
+
+    <!-- Volunteer Registration Modal -->
+    <div id="volunteer-modal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="volunteer-modal-title">
+            <button class="modal-close" onclick="closeVolunteerForm()" aria-label="Close">&times;</button>
+            <h2 id="volunteer-modal-title">Volunteer Registration</h2>
+
+            <form id="volunteer-form" onsubmit="submitVolunteerForm(event)">
+                <input type="text" id="volunteer-name" name="name" placeholder="Your full name" required />
+                <input type="email" id="volunteer-email" name="email" placeholder="Email" required />
+                <input type="tel" id="volunteer-phone" name="phone" placeholder="Phone number" />
+                <input type="text" id="volunteer-city" name="city" placeholder="City / Service area" />
+                <select id="volunteer-availability" name="availability">
+                    <option value="">Availability</option>
+                    <option>Weekdays</option>
+                    <option>Weeknights</option>
+                    <option>Weekends</option>
+                    <option>Flexible</option>
+                </select>
+
+                <textarea id="volunteer-interests" name="interests" placeholder="Areas of interest / skills"></textarea>
+
+                <div class="form-actions">
+                    <button type="button" class="back-button" onclick="closeVolunteerForm()">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Registration</button>
+                </div>
+            </form>
+
+            <div id="volunteer-success" class="modal-success" style="display:none;">
+                Thank you — we'll contact you with volunteer opportunities soon.
+            </div>
+        </div>
+    </div>
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -1001,6 +1169,201 @@
             
             window.scrollTo(0, 0);
         }
+
+        /* Facility registration modal helpers */
+        function openFacilityForm() {
+            const modal = document.getElementById('facility-modal');
+            modal.removeAttribute('aria-hidden');
+            modal.style.display = 'flex';
+            // reset form
+            const form = document.getElementById('facility-form');
+            form.reset();
+            document.getElementById('facility-success').style.display = 'none';
+            // focus first input
+            setTimeout(()=> document.getElementById('facility-name').focus(), 100);
+        }
+
+        function closeFacilityForm() {
+            const modal = document.getElementById('facility-modal');
+            modal.setAttribute('aria-hidden', 'true');
+            modal.style.display = 'none';
+        }
+
+        async function submitFacilityForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('facility-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+
+            if (!name || !email) {
+                alert('Please provide facility name and contact email.');
+                return;
+            }
+
+            const payload = {
+                facilityName: name,
+                contactPerson: document.getElementById('contact-person').value.trim(),
+                email: email,
+                phone: document.getElementById('contact-phone').value.trim(),
+                city: document.getElementById('facility-city').value.trim(),
+                service: document.getElementById('facility-service').value,
+                description: document.getElementById('facility-desc').value.trim()
+            };
+
+            try {
+                const resp = await fetch('http://localhost:5000/register-facility', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await resp.json().catch(() => ({}));
+                if (!resp.ok) {
+                    const err = data && data.error ? data.error : 'Server error';
+                    alert('Submission failed: ' + err);
+                    return;
+                }
+
+                // success UI
+                document.getElementById('facility-form').style.display = 'none';
+                document.getElementById('facility-success').style.display = 'block';
+
+                setTimeout(() => {
+                    closeFacilityForm();
+                    document.getElementById('facility-form').style.display = '';
+                }, 1800);
+
+            } catch (err) {
+                console.error('Submission error', err);
+                alert('Could not submit registration — is the local backend running?');
+            }
+        }
+
+            /* Provider (home care) modal helpers */
+            function openProviderForm() {
+                const modal = document.getElementById('provider-modal');
+                modal.removeAttribute('aria-hidden');
+                modal.style.display = 'flex';
+                const form = document.getElementById('provider-form');
+                form.reset();
+                document.getElementById('provider-success').style.display = 'none';
+                setTimeout(()=> document.getElementById('provider-name').focus(), 100);
+            }
+
+            function closeProviderForm() {
+                const modal = document.getElementById('provider-modal');
+                modal.setAttribute('aria-hidden', 'true');
+                modal.style.display = 'none';
+            }
+
+            async function submitProviderForm(e) {
+                e.preventDefault();
+                const name = document.getElementById('provider-name').value.trim();
+                const email = document.getElementById('provider-email').value.trim();
+                if (!name || !email) {
+                    alert('Please provide your name and contact email.');
+                    return;
+                }
+
+                const payload = {
+                    providerName: name,
+                    businessName: document.getElementById('provider-business').value.trim(),
+                    email: email,
+                    phone: document.getElementById('provider-phone').value.trim(),
+                    city: document.getElementById('provider-city').value.trim(),
+                    service: document.getElementById('provider-service').value,
+                    description: document.getElementById('provider-desc').value.trim()
+                };
+
+                try {
+                    const resp = await fetch('http://localhost:5000/register-provider', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const data = await resp.json().catch(() => ({}));
+                    if (!resp.ok) {
+                        const err = data && data.error ? data.error : 'Server error';
+                        alert('Submission failed: ' + err);
+                        return;
+                    }
+
+                    document.getElementById('provider-form').style.display = 'none';
+                    document.getElementById('provider-success').style.display = 'block';
+
+                    setTimeout(() => {
+                        closeProviderForm();
+                        document.getElementById('provider-form').style.display = '';
+                    }, 1800);
+
+                } catch (err) {
+                    console.error('Submission error', err);
+                    alert('Could not submit profile — is the local backend running?');
+                }
+            }
+
+            /* Volunteer modal helpers */
+            function openVolunteerForm() {
+                const modal = document.getElementById('volunteer-modal');
+                modal.removeAttribute('aria-hidden');
+                modal.style.display = 'flex';
+                const form = document.getElementById('volunteer-form');
+                form.reset();
+                document.getElementById('volunteer-success').style.display = 'none';
+                setTimeout(()=> document.getElementById('volunteer-name').focus(), 100);
+            }
+
+            function closeVolunteerForm() {
+                const modal = document.getElementById('volunteer-modal');
+                modal.setAttribute('aria-hidden', 'true');
+                modal.style.display = 'none';
+            }
+
+            async function submitVolunteerForm(e) {
+                e.preventDefault();
+                const name = document.getElementById('volunteer-name').value.trim();
+                const email = document.getElementById('volunteer-email').value.trim();
+                if (!name || !email) {
+                    alert('Please provide your name and contact email.');
+                    return;
+                }
+
+                const payload = {
+                    name: name,
+                    email: email,
+                    phone: document.getElementById('volunteer-phone').value.trim(),
+                    city: document.getElementById('volunteer-city').value.trim(),
+                    availability: document.getElementById('volunteer-availability').value,
+                    interests: document.getElementById('volunteer-interests').value.trim()
+                };
+
+                try {
+                    const resp = await fetch('http://localhost:5000/register-volunteer', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const data = await resp.json().catch(() => ({}));
+                    if (!resp.ok) {
+                        const err = data && data.error ? data.error : 'Server error';
+                        alert('Submission failed: ' + err);
+                        return;
+                    }
+
+                    document.getElementById('volunteer-form').style.display = 'none';
+                    document.getElementById('volunteer-success').style.display = 'block';
+
+                    setTimeout(() => {
+                        closeVolunteerForm();
+                        document.getElementById('volunteer-form').style.display = '';
+                    }, 1800);
+
+                } catch (err) {
+                    console.error('Submission error', err);
+                    alert('Could not submit registration — is the local backend running?');
+                }
+            }
     </script>
 </body>
 </html>
